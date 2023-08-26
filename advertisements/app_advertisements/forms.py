@@ -35,7 +35,7 @@ from .models import Advertisement
 #             'image': forms.FileInput() 
 #         } 
         
-
+ 
 
 class AdvertisementForm(forms.ModelForm):
      

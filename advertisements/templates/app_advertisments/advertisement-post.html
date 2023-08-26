@@ -19,44 +19,47 @@
 
 <body>
 {% block content %}
-<ul class="nav nav-pills sticky-top bg-white nav-fill">
+  <ul class="nav nav-pills sticky-top bg-white nav-fill"> 
     <li class="nav-item">
       <a class="nav-link" href={% url 'glav' %}><span style="font-weight: bold;">Главная</span>
       </a>
     </li>
-
+  
     <li class="nav-item">
       <a class="nav-link" href={% url 'top_sellers' %}><span style="font-weight: bold;">Топ продавцов</span>
       </a>
     </li>
-
+  
     <li class="nav-item">
       <a class="nav-link active" aria-current="page" href={% url 'advertisement_post' %}><span style="font-weight: bold;">Разместить объявление</span>
       </a>
     </li>
   
-    <li class="nav-item">
-      <a class="nav-link" href={% url 'register' %}><span style="font-weight: bold;">Регистрация</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href={% url 'login' %}><span style="font-weight: bold;">Войти</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href={% url 'profile' %}><span style="font-weight: bold;">Профиль</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <span style="font-weight: bold;">Выйти</span>
-      </a>
-    </li>
-
+    {% if user.is_authenticated %}
+        <li class="nav-item"> 
+          <a class="nav-link" href={% url 'profile' %}><span style="font-weight: bold;">Профиль</span> 
+          </a> 
+        </li> 
+  
+        <li class="nav-item">
+          <a class="nav-link" href={% url 'logout' %}><span style="font-weight: bold;">Выйти</span>
+          </a>
+        </li>
+    {% else %}
+        <li class="nav-item"> 
+          <a class="nav-link" href={% url 'login' %}><span style="font-weight: bold;">Войти</span> 
+          </a> 
+        </li> 
+  
+        <li class="nav-item"> 
+          <a class="nav-link" href={% url 'register' %}><span style="font-weight: bold;">Регистрация</span> 
+          </a> 
+        </li> 
+    {% endif %}
+  
   </ul>
+
+
 
   <div class="row">
     <div class="col" style="margin: 50px;">
@@ -72,7 +75,7 @@
       {% csrf_token %}
       <div class="row mb-3 offset-sm-5">
         <div class="col-6">
-          {{ form.as_p }}
+          {{ form }}
         </div>
       </div>
 
